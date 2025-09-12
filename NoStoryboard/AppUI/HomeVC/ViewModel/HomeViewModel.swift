@@ -11,23 +11,10 @@ import Foundation
 final class HomeViewModel {
     
     private let service: HomeServiceProtocol
-    
-    // Simple Banner model used by the view model
-    struct Banner: Decodable {
-        let urlString: String
-        var url: URL? { URL(string: urlString) }
-    }
 
-    // Top-level structure matching local JSON file (we only need bannerSlideLinks here)
-    private struct AllData: Decodable {
-        let bannerSlideLinks: [String]?
-    }
-    
-    private(set) var banners: [Banner] = []
     var onUpdate: (() -> Void)?
     
-    
-    
+
     init(service: HomeServiceProtocol = HomeService()) {
         self.service = service
     }
