@@ -6,45 +6,30 @@
 //
 
 import Foundation
+import UIKit
 
 
 final class HomeViewModel {
-    
     private let service: HomeServiceProtocol
-
-    var onUpdate: (() -> Void)?
-    
+    private(set) var banners:Observerable<[String]> = Observerable([])
 
     init(service: HomeServiceProtocol = HomeService()) {
         self.service = service
     }
     
     func loadBanners(){
-        // Read local JSON from bundle subdirectory LocalData/allData.json
-        DispatchQueue.global(qos: .background).async { [weak self] in
+        // Delegate JSON loading to the service which reads the local JSON using Codable
+        service.fetchBannerLinks { [weak self] result in
             guard let self = self else { return }
-            let bundle = Bundle.main
-            guard let url = bundle.url(forResource: "allData", withExtension: "json", subdirectory: "LocalData") ?? bundle.url(forResource: "allData", withExtension: "json") else {
-                print("HomeViewModel: allData.json not found in bundle")
-                return
-            }
-
-            do {
-                let data = try Data(contentsOf: url)
-                let decoder = JSONDecoder()
-                let all = try decoder.decode(AllData.self, from: data)
-                let links = all.bannerSlideLinks ?? []
-                let banners = links.map { Banner(urlString: $0) }
+            switch result {
+            case .success(let links):
                 DispatchQueue.main.async {
-                    self.banners = banners
-                    self.onUpdate?()
+                    self.banners.value = links
                 }
-            } catch {
-                print("HomeViewModel: failed to load/parse allData.json - \(error)")
+            case .failure(let error):
+                self.banners.value = []
+                print("HomeViewModel: failed to fetch banner links - \(error)")
             }
         }
     }
-    
-    
-    
 }

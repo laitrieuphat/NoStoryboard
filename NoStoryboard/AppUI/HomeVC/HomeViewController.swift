@@ -8,17 +8,23 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    private var banners:[String] = []
+    private let homeVM = HomeViewModel()
     private var collectionView:UICollectionView?
     private var arrayCell = ["BannerCollectionViewCell","CategoryCollectionViewCell","ProductCollectionViewCell"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        view.backgroundColor = .yellow
-        self.navigationController?.navigationBar.isHidden = true
+        bindingData() // bind first
+        homeVM.loadBanners() // then request data
+
     }
     
     fileprivate func setupUI() {
+        self.view.backgroundColor = .yellow
+        self.navigationController?.navigationBar.isHidden = true
+
         // create collection view using view.bounds so it respects the tab bar / safe area
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
         guard let mainClsView = collectionView else { return }
@@ -42,13 +48,18 @@ class HomeViewController: UIViewController {
         // register default cell for other items
         mainClsView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         view.addSubview(mainClsView)
+
     }
     
-    
-    
-    
+    private func bindingData(){
+        homeVM.banners.bind { [weak self ] banners in
+            DispatchQueue.main.async {
+                self?.banners = banners
+                self?.collectionView?.reloadData()
+            }
+        }
+    }
 }
-
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return arrayCell.count
@@ -60,11 +71,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCollectionViewCell.identifier, for: indexPath) as? BannerCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            // configure banner with an array of images from assets
-            let banners = ["banner1",
-                           "banner2",
-                           "banner_placeholder"].compactMap { UIImage(named: $0) }
-            cell.configure(with: banners)
+            cell.configure(with: self.banners)
             return cell
         }
         // other cells
@@ -78,6 +85,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if indexPath.item == 0 {
             return CGSize(width: width, height: 250)
         }
-        return CGSize(width: width, height: 1)
+        return CGSize(width: width, height: 10)
     }
 }

@@ -11,18 +11,18 @@ protocol HomeServiceProtocol {
 }
 
 final class HomeService: HomeServiceProtocol {
-    
-    
-    
-    
-    
-    func fetchBannerLinks(completion: @escaping (Result<[String], Error>) -> Void) {
-        
-        
-        
-        
-        
-        
 
+    func fetchBannerLinks(completion: @escaping (Result<[String], Error>) -> Void) {
+        // Load the local JSON on a background queue to avoid blocking the main thread
+        DispatchQueue.global(qos: .background).async {
+            do {
+                let model: HomeModel = try LocalJSONLoader.load(HomeModel.self,
+                                                                fromResource: "allData",
+                                                                subdirectory: "LocalData")
+                completion(.success(model.bannerSlideLinks))
+            } catch {
+                completion(.failure(error))
+            }
+        }
     }
 }
