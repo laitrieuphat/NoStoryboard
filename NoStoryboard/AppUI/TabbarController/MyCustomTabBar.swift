@@ -13,7 +13,7 @@ class MyCustomTabBar: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self // set the delegate to self
-        self.tabBar.backgroundColor = .yellow
+        self.tabBar.backgroundColor = .systemGray
         
         self.viewControllers = [
             createNavigationController(for: HomeViewController(), title: "Home", image: UIImage(systemName: "house")!),

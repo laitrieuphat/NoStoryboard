@@ -11,15 +11,15 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BannerCollectionViewCell" customModule="NoStoryboard" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="248" height="276"/>
+            <rect key="frame" x="0.0" y="0.0" width="544" height="551"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="248" height="276"/>
+                <rect key="frame" x="0.0" y="0.0" width="544" height="551"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="oD6-21-Pp8">
-                        <rect key="frame" x="1" y="1" width="246" height="274"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <rect key="frame" x="1" y="1" width="542" height="549"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fkH-Uv-g8O">
                             <size key="itemSize" width="128" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -27,25 +27,31 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
+                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="pjf-ts-EjN">
+                        <rect key="frame" x="235.66666666666663" y="515" width="73" height="26"/>
+                    </pageControl>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstItem="pjf-ts-EjN" firstAttribute="centerX" secondItem="oD6-21-Pp8" secondAttribute="centerX" id="aBz-t8-JNj"/>
                 <constraint firstItem="oD6-21-Pp8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="1" id="dDn-Na-IWD"/>
                 <constraint firstAttribute="bottom" secondItem="oD6-21-Pp8" secondAttribute="bottom" constant="1" id="o5z-YW-Mnc"/>
                 <constraint firstItem="oD6-21-Pp8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="1" id="qUn-jA-7pR"/>
                 <constraint firstAttribute="trailing" secondItem="oD6-21-Pp8" secondAttribute="trailing" constant="1" id="yHA-xF-eex"/>
+                <constraint firstAttribute="bottom" secondItem="pjf-ts-EjN" secondAttribute="bottom" constant="10" id="zvJ-ck-vLf"/>
             </constraints>
-            <size key="customSize" width="248" height="276"/>
+            <size key="customSize" width="544" height="551"/>
             <connections>
-                <outlet property="BannerCollectionView" destination="oD6-21-Pp8" id="YTX-yz-QqV"/>
+                <outlet property="bannerCollectionView" destination="oD6-21-Pp8" id="YTX-yz-QqV"/>
+                <outlet property="pageControl" destination="pjf-ts-EjN" id="XCv-uy-ju0"/>
             </connections>
-            <point key="canvasLocation" x="219.84732824427479" y="66.197183098591552"/>
+            <point key="canvasLocation" x="445.80152671755724" y="163.02816901408451"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -71,7 +71,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCollectionViewCell.identifier, for: indexPath) as? BannerCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            cell.configure(with: self.banners)
+            cell.configureUpdate(with: self.banners)
             return cell
         }
         // other cells
@@ -81,7 +81,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width
+        let width = UIScreen.main.bounds.width
+        // first cell -> banner
         if indexPath.item == 0 {
             return CGSize(width: width, height: 250)
         }
