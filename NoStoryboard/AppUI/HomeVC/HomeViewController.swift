@@ -11,20 +11,20 @@ class HomeViewController: UIViewController {
     private var banners:[String] = []
     private let homeVM = HomeViewModel()
     private var collectionView:UICollectionView?
-    private var arrayCell = ["BannerCollectionViewCell","CategoryCollectionViewCell","ProductCollectionViewCell"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         bindingData() // bind first
         homeVM.loadBanners() // then request data
-
+        
     }
     
     fileprivate func setupUI() {
         self.view.backgroundColor = .yellow
         self.navigationController?.navigationBar.isHidden = true
-
+        
         // create collection view using view.bounds so it respects the tab bar / safe area
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
         guard let mainClsView = collectionView else { return }
@@ -36,6 +36,7 @@ class HomeViewController: UIViewController {
             layout.minimumInteritemSpacing = 0
             layout.sectionInset = .zero
         }
+        
         // configure collection view
         mainClsView.frame = view.bounds
         // allow autoresizing so it resizes with view and doesn't cover tab bar
@@ -43,12 +44,14 @@ class HomeViewController: UIViewController {
         mainClsView.backgroundColor = .white
         mainClsView.delegate = self
         mainClsView.dataSource = self
-        // register custom banner cell nib (ensure nib name matches)
-        mainClsView.register(UINib(nibName: "BannerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: BannerCollectionViewCell.identifier)
-        // register default cell for other items
+        
+        mainClsView.register(UINib(nibName: "BannerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "BannerCollectionViewCell")
+        mainClsView.register(UINib(nibName: "LogoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "LogoCollectionViewCell")
+        
+        
+        // register default cell for unexpected items
         mainClsView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         view.addSubview(mainClsView)
-
     }
     
     private func bindingData(){
@@ -62,30 +65,64 @@ class HomeViewController: UIViewController {
 }
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arrayCell.count
+        return homeVM.arrayCell.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // first cell -> banner
-        if indexPath.item == 0 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCollectionViewCell.identifier, for: indexPath) as? BannerCollectionViewCell else {
+        let cellName = homeVM.arrayCell[indexPath.item]
+        
+        switch cellName {
+        case "BannerCollectionViewCell":
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BannerCollectionViewCell", for: indexPath) as? BannerCollectionViewCell else {
                 return UICollectionViewCell()
             }
+            
             cell.configureUpdate(with: self.banners)
             return cell
+            
+        case "LogoCollectionViewCell":
+            if let logoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "LogoCollectionViewCell", for: indexPath) as? LogoCollectionViewCell {
+                // configure logoCell if needed
+                return logoCell
+            }
+            let defaultCell = collectionView.dequeueReusableCell(withReuseIdentifier: "LogoCollectionViewCell", for: indexPath)
+            defaultCell.backgroundColor = .systemGray5
+            return defaultCell
+            
+            //        case "CategoryCollectionViewCell":
+            //            if let catCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as? CategoryCollectionViewCell {
+            //                return catCell
+            //            }
+            //            let defaultCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath)
+            //            defaultCell.backgroundColor = .systemGray4
+            //            return defaultCell
+            //
+            //        case "ProductCollectionViewCell":
+            //            if let prodCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionViewCell", for: indexPath) as? ProductCollectionViewCell {
+            //                return prodCell
+            //            }
+            //            let defaultCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionViewCell", for: indexPath)
+            //            defaultCell.backgroundColor = .systemGray3
+            //            return defaultCell
+            
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+            cell.backgroundColor = .red
+            return cell
         }
-        // other cells
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .red
-        return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = UIScreen.main.bounds.width
-        // first cell -> banner
-        if indexPath.item == 0 {
-            return CGSize(width: width, height: 250)
+        let cellName = homeVM.arrayCell[indexPath.item]
+        
+        switch cellName {
+        case "LogoCollectionViewCell":
+            return CGSize(width: width, height: 60)
+        case "BannerCollectionViewCell":
+            return CGSize(width: width, height: 350)
+        default:
+            return CGSize(width: width, height: 80)
         }
-        return CGSize(width: width, height: 10)
     }
 }

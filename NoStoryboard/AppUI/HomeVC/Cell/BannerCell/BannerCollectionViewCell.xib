@@ -10,15 +10,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BannerCollectionViewCell" customModule="NoStoryboard" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="544" height="551"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="BannerCollectionViewCell" id="gTV-IL-0wX" customClass="BannerCollectionViewCell" customModule="NoStoryboard" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="487" height="289"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="544" height="551"/>
+                <rect key="frame" x="0.0" y="0.0" width="487" height="289"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="oD6-21-Pp8">
-                        <rect key="frame" x="1" y="1" width="542" height="549"/>
+                        <rect key="frame" x="1" y="1" width="485" height="287"/>
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fkH-Uv-g8O">
                             <size key="itemSize" width="128" height="128"/>
@@ -27,31 +27,77 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
-                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="pjf-ts-EjN">
-                        <rect key="frame" x="235.66666666666663" y="515" width="73" height="26"/>
-                    </pageControl>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BẠN ĐANG MUỐN ĐI ĐÂU?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ut-8t-U2P">
+                        <rect key="frame" x="119" y="105" width="249" height="19.333333333333329"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="19.329999999999998" id="IcX-ZS-xPB"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                        <color key="textColor" systemColor="tableBackgroundColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hãy để Like Tour tư vấn cho bạn chuyến đi tuyệt vời nhất!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AXB-TE-JN9">
+                        <rect key="frame" x="56" y="130.66666666666666" width="375" height="14.333333333333343"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="375" id="Y01-GT-aTG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SNe-2H-Dtd">
+                        <rect key="frame" x="417" y="165" width="50" height="40"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="bPp-53-ogg"/>
+                            <constraint firstAttribute="height" constant="40" id="zMy-Zm-poB"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system"/>
+                    </button>
+                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Bạn Muốn Đi Đâu" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="new-Hc-SJ1">
+                        <rect key="frame" x="20" y="165" width="397" height="40"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="pjf-ts-EjN" firstAttribute="centerX" secondItem="oD6-21-Pp8" secondAttribute="centerX" id="aBz-t8-JNj"/>
+                <constraint firstItem="new-Hc-SJ1" firstAttribute="bottom" secondItem="SNe-2H-Dtd" secondAttribute="bottom" id="5K7-yw-GSn"/>
+                <constraint firstItem="8Ut-8t-U2P" firstAttribute="centerY" secondItem="oD6-21-Pp8" secondAttribute="centerY" constant="-30" id="6g7-ez-eus"/>
+                <constraint firstAttribute="trailing" secondItem="SNe-2H-Dtd" secondAttribute="trailing" constant="20" id="Dcm-s3-PJE"/>
+                <constraint firstItem="new-Hc-SJ1" firstAttribute="top" secondItem="SNe-2H-Dtd" secondAttribute="top" id="GSD-La-BWe"/>
+                <constraint firstItem="AXB-TE-JN9" firstAttribute="top" secondItem="8Ut-8t-U2P" secondAttribute="bottom" constant="6.6666666666666714" id="Hob-yH-cTd"/>
+                <constraint firstItem="SNe-2H-Dtd" firstAttribute="leading" secondItem="new-Hc-SJ1" secondAttribute="trailing" id="aS2-82-8Ud"/>
+                <constraint firstItem="new-Hc-SJ1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="bkK-Hd-qcN"/>
                 <constraint firstItem="oD6-21-Pp8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="1" id="dDn-Na-IWD"/>
                 <constraint firstAttribute="bottom" secondItem="oD6-21-Pp8" secondAttribute="bottom" constant="1" id="o5z-YW-Mnc"/>
+                <constraint firstItem="8Ut-8t-U2P" firstAttribute="centerX" secondItem="oD6-21-Pp8" secondAttribute="centerX" id="oYY-f3-kcl"/>
                 <constraint firstItem="oD6-21-Pp8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="1" id="qUn-jA-7pR"/>
+                <constraint firstItem="SNe-2H-Dtd" firstAttribute="top" secondItem="AXB-TE-JN9" secondAttribute="bottom" constant="20" id="slB-Zu-WZy"/>
+                <constraint firstItem="AXB-TE-JN9" firstAttribute="centerX" secondItem="oD6-21-Pp8" secondAttribute="centerX" id="xDs-us-hcH"/>
                 <constraint firstAttribute="trailing" secondItem="oD6-21-Pp8" secondAttribute="trailing" constant="1" id="yHA-xF-eex"/>
-                <constraint firstAttribute="bottom" secondItem="pjf-ts-EjN" secondAttribute="bottom" constant="10" id="zvJ-ck-vLf"/>
             </constraints>
-            <size key="customSize" width="544" height="551"/>
+            <size key="customSize" width="487" height="289"/>
             <connections>
+                <outlet property="BannerCollectionView" destination="oD6-21-Pp8" id="VjV-6J-4gQ"/>
                 <outlet property="bannerCollectionView" destination="oD6-21-Pp8" id="YTX-yz-QqV"/>
-                <outlet property="pageControl" destination="pjf-ts-EjN" id="XCv-uy-ju0"/>
             </connections>
-            <point key="canvasLocation" x="445.80152671755724" y="163.02816901408451"/>
+            <point key="canvasLocation" x="-353.43511450381681" y="70.774647887323951"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <systemColor name="systemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tableBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
