@@ -12,8 +12,12 @@ import UIKit
 final class HomeViewModel {
     private let service: HomeServiceProtocol
     private(set) var banners:Observerable<[String]> = Observerable([])
-    var arrayCell = ["LogoCollectionViewCell",
+    var arrayCell = [
                      "BannerCollectionViewCell",
+                     "InforCollectionViewCell",
+                    "ProductCollectionViewCell",
+                     "CategoryCollectionViewCell",
+                     "ProductCollectionViewCell",
                      "CategoryCollectionViewCell",
                     "ProductCollectionViewCell"]
     init(service: HomeServiceProtocol = HomeService()) {

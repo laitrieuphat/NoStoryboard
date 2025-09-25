@@ -11,7 +11,11 @@ class HomeViewController: UIViewController {
     private var banners:[String] = []
     private let homeVM = HomeViewModel()
     private var collectionView:UICollectionView?
-    
+    private var viewOnTop: ViewOnTopHomeView = {
+        var view = ViewOnTopHomeView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +26,25 @@ class HomeViewController: UIViewController {
     }
     
     fileprivate func setupUI() {
-        self.view.backgroundColor = .yellow
         self.navigationController?.navigationBar.isHidden = true
-        
-        // create collection view using view.bounds so it respects the tab bar / safe area
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
+        self.collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
         guard let mainClsView = collectionView else { return }
+        view.addSubview(mainClsView)
+        view.addSubview(viewOnTop)
+        
+        // Use safeAreaLayoutGuide for top constraint
+        viewOnTop.alpha = 1
+        viewOnTop.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        viewOnTop.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        viewOnTop.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        viewOnTop.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        viewOnTop.bottomAnchor.constraint(equalTo: mainClsView.topAnchor).isActive = true
+        
+        mainClsView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        mainClsView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        mainClsView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        
         // configure collection view layout
         mainClsView.backgroundColor = .blue
         if let layout = mainClsView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -38,20 +55,18 @@ class HomeViewController: UIViewController {
         }
         
         // configure collection view
-        mainClsView.frame = view.bounds
+//        mainClsView.frame = view.bounds
         // allow autoresizing so it resizes with view and doesn't cover tab bar
         mainClsView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mainClsView.backgroundColor = .white
         mainClsView.delegate = self
         mainClsView.dataSource = self
-        
-        mainClsView.register(UINib(nibName: "BannerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "BannerCollectionViewCell")
-        mainClsView.register(UINib(nibName: "LogoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "LogoCollectionViewCell")
-        
-        
+        mainClsView.translatesAutoresizingMaskIntoConstraints = false
+        mainClsView.register(UINib(nibName: "BannerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: BannerCollectionViewCell.identifier)
+
+        mainClsView.register(UINib(nibName: "InforCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: InforCollectionViewCell.identifier)
         // register default cell for unexpected items
         mainClsView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        view.addSubview(mainClsView)
     }
     
     private func bindingData(){
@@ -80,23 +95,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.configureUpdate(with: self.banners)
             return cell
             
-        case "LogoCollectionViewCell":
-            if let logoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "LogoCollectionViewCell", for: indexPath) as? LogoCollectionViewCell {
-                // configure logoCell if needed
-                return logoCell
-            }
-            let defaultCell = collectionView.dequeueReusableCell(withReuseIdentifier: "LogoCollectionViewCell", for: indexPath)
-            defaultCell.backgroundColor = .systemGray5
-            return defaultCell
             
-            //        case "CategoryCollectionViewCell":
-            //            if let catCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as? CategoryCollectionViewCell {
-            //                return catCell
-            //            }
-            //            let defaultCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath)
-            //            defaultCell.backgroundColor = .systemGray4
-            //            return defaultCell
-            //
+        case "InforCollectionViewCell":
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InforCollectionViewCell", for: indexPath) as? InforCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            cell.backgroundColor = .systemGray4
+            return cell
+            
             //        case "ProductCollectionViewCell":
             //            if let prodCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionViewCell", for: indexPath) as? ProductCollectionViewCell {
             //                return prodCell
@@ -117,10 +123,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cellName = homeVM.arrayCell[indexPath.item]
         
         switch cellName {
-        case "LogoCollectionViewCell":
-            return CGSize(width: width, height: 60)
+
         case "BannerCollectionViewCell":
             return CGSize(width: width, height: 350)
+        case "InforCollectionViewCell":
+            return CGSize(width: width, height: 200)
+
         default:
             return CGSize(width: width, height: 80)
         }

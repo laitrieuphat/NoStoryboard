@@ -10,7 +10,7 @@ import UIKit
 class BannerCollectionViewCell: UICollectionViewCell {
     static let identifier = "BannerCollectionViewCell"
     @IBOutlet weak var BannerCollectionView: UICollectionView!
-    var imgArr:[String] = [ String]()
+    var imgArr:[String] = [String]()
     var timer = Timer()
     var counter = 0
     

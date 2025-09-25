@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="InforCollectionViewCell" reuseIdentifier="InforCollectionViewCell" id="gTV-IL-0wX" customClass="InforCollectionViewCell" customModule="NoStoryboard" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="475" height="225"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="475" height="225"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y00-0D-Wcj" userLabel="ContentView">
+                        <rect key="frame" x="0.0" y="0.0" width="475" height="225"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PeopleLike01" translatesAutoresizingMaskIntoConstraints="NO" id="CMS-CC-LyM">
+                                <rect key="frame" x="20" y="82.666666666666671" width="60" height="60.000000000000014"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Lnb-SW-Sf9"/>
+                                    <constraint firstAttribute="width" constant="60" id="gjO-xI-RKM"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PeopleMoney01" translatesAutoresizingMaskIntoConstraints="NO" id="y3S-YH-woi">
+                                <rect key="frame" x="20" y="157.66666666666666" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="SRU-bq-Lcv"/>
+                                    <constraint firstAttribute="height" constant="60" id="n8R-m4-DnJ"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="People01" translatesAutoresizingMaskIntoConstraints="NO" id="4x0-kK-PZN">
+                                <rect key="frame" x="20" y="7.6666666666666643" width="60" height="59.999999999999993"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Like Tour hành trình vòng quanh thế giới" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Yw-DC-DpG">
+                                <rect key="frame" x="99.999999999999986" y="157.66666666666666" width="226.66666666666663" height="14.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uy tín chất lượng " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Eq-6S-cro">
+                                <rect key="frame" x="100" y="82.666666666666671" width="99.666666666666686" height="14.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đảm bảo giá tốt nhất" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BcT-uu-oAS">
+                                <rect key="frame" x="100" y="17.666666666666668" width="118.66666666666669" height="14.333333333333332"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="lzc-Lr-msi">
+                                <rect key="frame" x="350" y="76" width="41.333333333333314" height="20.333333333333329"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Like tour luôn nỗ lực mang đến trải nghiệm tốt nhất cho khách hàng" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vsv-Jl-x4w">
+                                <rect key="frame" x="100" y="37" width="267.66666666666669" height="9.6666666666666643"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="8"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Like Tour đặt khách hàng lên trên hết, đội ngũ nhân viên sẳn sàn hỗ trở Quý Khách" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBu-KB-M8U">
+                                <rect key="frame" x="100" y="102" width="295" height="21.666666666666671"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Like Tour luôn tìm kiếm và chọn lọc những tour tiết kiệm thời gian nhất" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNS-kU-sAP">
+                                <rect key="frame" x="100" y="177" width="309" height="11"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BcT-uu-oAS" firstAttribute="top" secondItem="4x0-kK-PZN" secondAttribute="top" constant="10" id="2Yn-DQ-5UJ"/>
+                            <constraint firstItem="Vsv-Jl-x4w" firstAttribute="leading" secondItem="BcT-uu-oAS" secondAttribute="leading" id="5aJ-6F-qhZ"/>
+                            <constraint firstItem="y3S-YH-woi" firstAttribute="centerX" secondItem="CMS-CC-LyM" secondAttribute="centerX" id="EAX-pU-ABU"/>
+                            <constraint firstItem="CMS-CC-LyM" firstAttribute="centerY" secondItem="Y00-0D-Wcj" secondAttribute="centerY" id="GN6-qd-nxA"/>
+                            <constraint firstItem="2Eq-6S-cro" firstAttribute="leading" secondItem="CMS-CC-LyM" secondAttribute="trailing" constant="20" id="Iem-iA-XcI"/>
+                            <constraint firstItem="dNS-kU-sAP" firstAttribute="leading" secondItem="4Yw-DC-DpG" secondAttribute="leading" id="Iie-xp-Pwp"/>
+                            <constraint firstItem="dNS-kU-sAP" firstAttribute="top" secondItem="4Yw-DC-DpG" secondAttribute="bottom" constant="5" id="NdJ-yZ-h2b"/>
+                            <constraint firstItem="4Yw-DC-DpG" firstAttribute="top" secondItem="y3S-YH-woi" secondAttribute="top" id="OOs-xG-dBq"/>
+                            <constraint firstItem="y3S-YH-woi" firstAttribute="top" secondItem="CMS-CC-LyM" secondAttribute="bottom" constant="15" id="PUX-dg-XRL"/>
+                            <constraint firstAttribute="trailing" secondItem="UBu-KB-M8U" secondAttribute="trailing" constant="80" id="Puj-tS-CvC"/>
+                            <constraint firstItem="4Yw-DC-DpG" firstAttribute="leading" secondItem="y3S-YH-woi" secondAttribute="trailing" constant="20" id="SQE-Iv-iLi"/>
+                            <constraint firstItem="UBu-KB-M8U" firstAttribute="leading" secondItem="2Eq-6S-cro" secondAttribute="leading" id="VBd-0Z-4TE"/>
+                            <constraint firstItem="UBu-KB-M8U" firstAttribute="top" secondItem="2Eq-6S-cro" secondAttribute="bottom" constant="5" id="cCw-H6-z7X"/>
+                            <constraint firstItem="CMS-CC-LyM" firstAttribute="leading" secondItem="Y00-0D-Wcj" secondAttribute="leading" constant="20" id="cXi-7P-ESX"/>
+                            <constraint firstItem="4x0-kK-PZN" firstAttribute="centerX" secondItem="CMS-CC-LyM" secondAttribute="centerX" id="dgG-2X-JSC"/>
+                            <constraint firstItem="4x0-kK-PZN" firstAttribute="width" secondItem="CMS-CC-LyM" secondAttribute="width" id="ef7-58-Mrx"/>
+                            <constraint firstItem="2Eq-6S-cro" firstAttribute="top" secondItem="CMS-CC-LyM" secondAttribute="top" id="hy6-X9-2jL"/>
+                            <constraint firstItem="4x0-kK-PZN" firstAttribute="height" secondItem="CMS-CC-LyM" secondAttribute="height" id="mUL-cq-56g"/>
+                            <constraint firstItem="Vsv-Jl-x4w" firstAttribute="top" secondItem="BcT-uu-oAS" secondAttribute="bottom" constant="5" id="q9k-AG-vAN"/>
+                            <constraint firstItem="CMS-CC-LyM" firstAttribute="top" secondItem="4x0-kK-PZN" secondAttribute="bottom" constant="15" id="qSa-mP-j2d"/>
+                            <constraint firstItem="BcT-uu-oAS" firstAttribute="leading" secondItem="4x0-kK-PZN" secondAttribute="trailing" constant="20" id="wei-jz-CMO"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="Y00-0D-Wcj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="7gb-Or-Lt7"/>
+                <constraint firstItem="Y00-0D-Wcj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="XsA-Yx-Zp6"/>
+                <constraint firstAttribute="bottom" secondItem="Y00-0D-Wcj" secondAttribute="bottom" id="o3x-aF-Lsn"/>
+                <constraint firstAttribute="trailing" secondItem="Y00-0D-Wcj" secondAttribute="trailing" id="zzy-14-iVA"/>
+            </constraints>
+            <size key="customSize" width="475" height="225"/>
+            <point key="canvasLocation" x="327.48091603053433" y="51.760563380281695"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="People01" width="512" height="512"/>
+        <image name="PeopleLike01" width="512" height="512"/>
+        <image name="PeopleMoney01" width="512" height="512"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
