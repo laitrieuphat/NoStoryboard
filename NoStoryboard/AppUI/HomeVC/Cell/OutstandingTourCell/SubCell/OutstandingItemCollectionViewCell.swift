@@ -6,10 +6,13 @@
 //
 
 import UIKit
+protocol OutstandingItemCollectionViewCellDelegate {
+    func didSelectItem(at indexPath: IndexPath)
+}
 
 class OutstandingItemCollectionViewCell: UICollectionViewCell {
     static let identifier = "OutstandingItemCollectionViewCell"
-    
+    var delegate: OutstandingItemCollectionViewCellDelegate?
     @IBOutlet weak var imgViewItem: UIImageView!
     
     @IBOutlet weak var titleNameItem: UILabel!

@@ -8,6 +8,7 @@
 import UIKit
 
 class OutstandingTourCollectionViewCell: UICollectionViewCell {
+  
     static let indentifier = "OutstandingTourCollectionViewCell"
     private var outstandingTours: [Item] = []
     @IBOutlet weak var titleNameLbl: UILabel!
@@ -51,12 +52,22 @@ extension OutstandingTourCollectionViewCell: UICollectionViewDelegate, UICollect
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OutstandingItemCollectionViewCell", for: indexPath) as? OutstandingItemCollectionViewCell else {
             return UICollectionViewCell()
         }
+        cell.titleNameItem.text = outstandingTours[indexPath.item].titleName
+        cell.imgViewItem.load(urlString: outstandingTours[indexPath.item].imgLink)
+        cell.delegate = self
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = UIScreen.main.bounds.width
         return CGSize(width: width/3, height: 400)
+    }
+    
+}
+
+extension OutstandingTourCollectionViewCell:OutstandingItemCollectionViewCellDelegate{
+    func didSelectItem(at indexPath: IndexPath) {
+        print("Selected item at \(indexPath)")
     }
     
 }
