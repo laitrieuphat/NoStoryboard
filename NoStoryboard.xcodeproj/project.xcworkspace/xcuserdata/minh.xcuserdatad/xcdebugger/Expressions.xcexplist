@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "OutstandingTourCollectionViewCell.collectionView(_:numberOfItemsInSection:):OutstandingTourCollectionViewCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "homeVM?.outstandingTours.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "HomeViewController.setupUI():HomeViewController.swift">
          <PersistentStrings>
             <PersistentString

@@ -9,6 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     private var banners:[String] = []
+    private var outstandingTours = [Item]()
     private let homeVM = HomeViewModel()
     private var collectionView:UICollectionView?
     private var viewOnTop: ViewOnTopHomeView = {
@@ -22,6 +23,7 @@ class HomeViewController: UIViewController {
         setupUI()
         bindingData() // bind first
         homeVM.loadBanners() // then request data
+        homeVM.loadOutstandingTours()
         
     }
     
@@ -55,7 +57,7 @@ class HomeViewController: UIViewController {
         }
         
         // configure collection view
-//        mainClsView.frame = view.bounds
+        //        mainClsView.frame = view.bounds
         // allow autoresizing so it resizes with view and doesn't cover tab bar
         mainClsView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mainClsView.backgroundColor = .white
@@ -63,13 +65,22 @@ class HomeViewController: UIViewController {
         mainClsView.dataSource = self
         mainClsView.translatesAutoresizingMaskIntoConstraints = false
         mainClsView.register(UINib(nibName: "BannerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: BannerCollectionViewCell.identifier)
-
         mainClsView.register(UINib(nibName: "InforCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: InforCollectionViewCell.identifier)
+        mainClsView.register(UINib(nibName: "OutstandingTourCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: OutstandingTourCollectionViewCell.indentifier)
+        
         // register default cell for unexpected items
         mainClsView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
     
     private func bindingData(){
+        homeVM.outstandingTours.bind { tours in
+            print("Outstanding tours updated: \(tours.count) tours")
+            DispatchQueue.main.async{
+                self.outstandingTours = tours
+                self.collectionView?.reloadData()
+            }
+            
+        }
         homeVM.banners.bind { [weak self ] banners in
             DispatchQueue.main.async {
                 self?.banners = banners
@@ -94,8 +105,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             cell.configureUpdate(with: self.banners)
             return cell
-            
-            
         case "InforCollectionViewCell":
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InforCollectionViewCell", for: indexPath) as? InforCollectionViewCell else {
                 return UICollectionViewCell()
@@ -103,14 +112,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.backgroundColor = .systemGray4
             return cell
             
-            //        case "ProductCollectionViewCell":
-            //            if let prodCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionViewCell", for: indexPath) as? ProductCollectionViewCell {
-            //                return prodCell
-            //            }
-            //            let defaultCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionViewCell", for: indexPath)
-            //            defaultCell.backgroundColor = .systemGray3
-            //            return defaultCell
-            
+        case "OutstandingTourCollectionViewCell":
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OutstandingTourCollectionViewCell", for: indexPath) as? OutstandingTourCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            cell.inject(data: self.outstandingTours, homeVM: homeVM)
+            return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
             cell.backgroundColor = .red
@@ -123,12 +130,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cellName = homeVM.arrayCell[indexPath.item]
         
         switch cellName {
-
         case "BannerCollectionViewCell":
             return CGSize(width: width, height: 350)
         case "InforCollectionViewCell":
             return CGSize(width: width, height: 200)
-
+        case "OutstandingTourCollectionViewCell":
+            return CGSize(width: width, height: 350)
+            
         default:
             return CGSize(width: width, height: 80)
         }

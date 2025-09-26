@@ -7,11 +7,41 @@
 
 import Foundation
 
-struct HomeModel:Codable {
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
+// To parse the JSON, add this file to your project and do:
+//
+//   let welcome = try? JSONDecoder().decode(Welcome.self, from: jsonData)
+
+import Foundation
+
+// MARK: - Welcome
+struct HomeModel: Codable {
     let bannerSlideLinks: [String]
-    // likeTourData can contain dictionaries/objects in JSON — decode flexibly
-    let likeTourData: [AnyCodable]
+    let likeTourData: [LikeTourDatum]
 }
+
+// MARK: - LikeTourDatum
+struct LikeTourDatum: Codable {
+    let id: Int
+    let items: [Item]
+}
+
+// MARK: - Item
+struct Item: Codable {
+    let titleName: String
+    let imgLink: String
+    let time: Time
+    let contact: Contact
+}
+
+enum Contact: String, Codable {
+    case liênHệNgay = "Liên hệ ngay"
+}
+
+enum Time: String, Codable {
+    case hằngTuần = "Hằng tuần"
+}
+
 
 
 // AnyCodable: flexible Codable wrapper to decode heterogeneous JSON values
