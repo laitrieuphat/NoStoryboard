@@ -36,7 +36,7 @@ class OutstandingTourCollectionViewCell: UICollectionViewCell {
         if let layout = outstandingTourClsView.collectionViewLayout as? UICollectionViewFlowLayout {
         
             layout.scrollDirection = .horizontal
-            layout.minimumLineSpacing = 1
+            layout.minimumLineSpacing = 5
             layout.minimumInteritemSpacing = 0
             layout.sectionInset = .zero
         }
@@ -54,6 +54,7 @@ extension OutstandingTourCollectionViewCell: UICollectionViewDelegate, UICollect
         }
         cell.titleNameItem.text = outstandingTours[indexPath.item].titleName
         cell.imgViewItem.load(urlString: outstandingTours[indexPath.item].imgLink)
+        cell.Subtile.text =  "Lịch khởi hành:\(outstandingTours[indexPath.item].time.rawValue)"
         cell.delegate = self
         return cell
     }

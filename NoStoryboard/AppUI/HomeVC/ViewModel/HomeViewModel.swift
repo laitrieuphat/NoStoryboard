@@ -17,7 +17,7 @@ final class HomeViewModel {
                      "BannerCollectionViewCell",
                      "InforCollectionViewCell",
                     "OutstandingTourCollectionViewCell",
-                     "CategoryCollectionViewCell",
+                     "LargeBannerCollectionViewCell",
                      "ProductCollectionViewCell",
                      "CategoryCollectionViewCell",
                     "ProductCollectionViewCell"]
@@ -26,11 +26,12 @@ final class HomeViewModel {
     }
     
     func loadOutstandingTours(){
-        service.fetchOutstandingTours { [weak self] result in
+        service.fetchTourBy { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let tours):
                 DispatchQueue.main.async {
+                    
                     self.outstandingTours.value = tours
                 }
             case .failure(let error):

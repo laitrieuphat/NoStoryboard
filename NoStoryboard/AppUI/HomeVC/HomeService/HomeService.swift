@@ -6,24 +6,52 @@
 //
 
 import Foundation
+enum TypeOfTour:Int{
+    case outstanding = 301
+    case international = 421
+    case domestic = 423
+    case group = 447
+    
+    func simpleDescription() -> String {
+        switch self {
+        case .outstanding:
+            return "outstanding"
+        case .international:
+            return "international"
+        case .domestic:
+            return "domestic"
+        case .group:
+            return "group"
+        }
+    }
+    
+}
 protocol HomeServiceProtocol {
     func fetchBannerLinks(completion: @escaping (Result<[String], Error>) -> Void)
-    func fetchOutstandingTours(completion: @escaping (Result<[Item], Error>) -> Void)
+    func fetchTourBy(completion: @escaping (Result<[Item], Error>) -> Void)
+    func fetchLargeBanner(by id: TypeOfTour,
+                          completion: @escaping (Result<String, Error>) -> Void)
 }
 
 final class HomeService: HomeServiceProtocol {
-    func fetchOutstandingTours(completion: @escaping (Result<[Item], any Error>) -> Void){
+    func fetchLargeBanner(by id: TypeOfTour, completion: @escaping (Result<String, any Error>) -> Void) {
+        
+    }
+    
+    func fetchTourBy(completion: @escaping (Result<[Item], any Error>) -> Void){
         DispatchQueue.global(qos: .background).async{
             do {
+                var arrayItem:[Item] = []
                 let model: HomeModel = try LocalJSONLoader.load(HomeModel.self,
                                                                 fromResource: "allData",
                                                                 subdirectory: "LocalData")
+                // Collect all items from likeTourData
+                for (key,value) in model.likeTourData.enumerated() {
+                    let filteredItems = value.items.filter { !$0.titleName.hasPrefix("set-5-yellow-stars") }
+                    arrayItem.append(contentsOf: filteredItems)
                 
-                for item in model.likeTourData {
-                    if item.id == 301{
-                        completion(.success(item.items))
-                    }
                 }
+                completion(.success(arrayItem))
             } catch {
                 completion(.failure(error))
             }

@@ -17,9 +17,12 @@ class OutstandingItemCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var titleNameItem: UILabel!
     
+    @IBOutlet weak var Subtile: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        imgViewItem.layer.cornerRadius = 10
     }
 
 }

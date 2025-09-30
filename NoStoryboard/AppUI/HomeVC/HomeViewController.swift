@@ -67,6 +67,7 @@ class HomeViewController: UIViewController {
         mainClsView.register(UINib(nibName: "BannerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: BannerCollectionViewCell.identifier)
         mainClsView.register(UINib(nibName: "InforCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: InforCollectionViewCell.identifier)
         mainClsView.register(UINib(nibName: "OutstandingTourCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: OutstandingTourCollectionViewCell.indentifier)
+        mainClsView.register(UINib(nibName: "LargeBannerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: LargeBannerCollectionViewCell.indentifier)
         
         // register default cell for unexpected items
         mainClsView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -102,7 +103,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BannerCollectionViewCell", for: indexPath) as? BannerCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            
             cell.configureUpdate(with: self.banners)
             return cell
         case "InforCollectionViewCell":
@@ -111,13 +111,20 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
             cell.backgroundColor = .systemGray4
             return cell
-            
         case "OutstandingTourCollectionViewCell":
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OutstandingTourCollectionViewCell", for: indexPath) as? OutstandingTourCollectionViewCell else {
                 return UICollectionViewCell()
             }
             cell.inject(data: self.outstandingTours, homeVM: homeVM)
             return cell
+            
+        case "LargeBannerCollectionViewCell":
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LargeBannerCollectionViewCell", for: indexPath) as? LargeBannerCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            cell.imageLargeBanner.load(urlString: "")
+            return cell
+            
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
             cell.backgroundColor = .red
@@ -136,7 +143,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return CGSize(width: width, height: 200)
         case "OutstandingTourCollectionViewCell":
             return CGSize(width: width, height: 350)
-            
+        case "LargeBannerCollectionViewCell":
+            return CGSize(width: width, height: 500)
         default:
             return CGSize(width: width, height: 80)
         }
