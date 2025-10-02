@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
         setupUI()
         bindingData() // bind first
         homeVM.loadBanners() // then request data
-        homeVM.loadOutstandingTours()
+        homeVM.loadingDataTourBy(type: .outstanding)
         
     }
     

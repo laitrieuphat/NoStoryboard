@@ -28,7 +28,7 @@ enum TypeOfTour:Int{
 }
 protocol HomeServiceProtocol {
     func fetchBannerLinks(completion: @escaping (Result<[String], Error>) -> Void)
-    func fetchTourBy(completion: @escaping (Result<[Item], Error>) -> Void)
+    func fetchDataTour(by id:TypeOfTour ,completion: @escaping (Result<[Item], Error>) -> Void)
     func fetchLargeBanner(by id: TypeOfTour,
                           completion: @escaping (Result<String, Error>) -> Void)
 }
@@ -38,7 +38,7 @@ final class HomeService: HomeServiceProtocol {
         
     }
     
-    func fetchTourBy(completion: @escaping (Result<[Item], any Error>) -> Void){
+    func fetchDataTour(by id:TypeOfTour, completion: @escaping (Result<[Item], any Error>) -> Void){
         DispatchQueue.global(qos: .background).async{
             do {
                 var arrayItem:[Item] = []
@@ -46,10 +46,11 @@ final class HomeService: HomeServiceProtocol {
                                                                 fromResource: "allData",
                                                                 subdirectory: "LocalData")
                 // Collect all items from likeTourData
-                for (key,value) in model.likeTourData.enumerated() {
+                for (_,value) in model.likeTourData.enumerated() {
                     let filteredItems = value.items.filter { !$0.titleName.hasPrefix("set-5-yellow-stars") }
-                    arrayItem.append(contentsOf: filteredItems)
-                
+                    if value.id == id.rawValue && !filteredItems.isEmpty{
+                        arrayItem.append(contentsOf: filteredItems)
+                    }
                 }
                 completion(.success(arrayItem))
             } catch {

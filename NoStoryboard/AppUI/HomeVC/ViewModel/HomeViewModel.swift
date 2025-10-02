@@ -13,6 +13,8 @@ final class HomeViewModel {
     private let service: HomeServiceProtocol
     private(set) var banners:Observerable<[String]> = Observerable([])
     private(set) var outstandingTours:Observerable<[Item]> = Observerable([])
+    private(set) var largeBanners:Observerable<[String]> = Observerable([])
+    
     var arrayCell = [
                      "BannerCollectionViewCell",
                      "InforCollectionViewCell",
@@ -25,19 +27,17 @@ final class HomeViewModel {
         self.service = service
     }
     
-    func loadOutstandingTours(){
-        service.fetchTourBy { [weak self] result in
-            guard let self = self else { return }
+    func loadingDataTourBy(type : TypeOfTour){
+        self.service.fetchDataTour(by: type) { [weak self] result in
+            guard let self = self else {return}
             switch result {
             case .success(let tours):
                 DispatchQueue.main.async {
-                    
                     self.outstandingTours.value = tours
                 }
             case .failure(let error):
                 self.outstandingTours.value = []
                 print("HomeViewModel: failed to fetch outstanding tours - \(error)")
-                    
             }
         }
     }
