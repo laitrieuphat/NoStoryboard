@@ -11,10 +11,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "HomeViewController.setupUI():HomeViewController.swift">
+         contextName = "HomeViewController.collectionView(_:cellForItemAt:):HomeViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "mainClsView.frame">
+               value = "self.outstandingTours">
+            </PersistentString>
+            <PersistentString
+               value = "largeBanners">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -23,6 +26,17 @@
          <PersistentStrings>
             <PersistentString
                value = "banners">
+            </PersistentString>
+            <PersistentString
+               value = "tours">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeViewController.setupUI():HomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "mainClsView.frame">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

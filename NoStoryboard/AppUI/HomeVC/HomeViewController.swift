@@ -8,8 +8,15 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    private var typeOfTours:TypeOfTour = .outstanding
+    private var outstandingTours:[Item] = []
+    private var internationalTours:[Item] = []
+    private var domesticTours:[Item] = []
+    private var groupTours:[Item] = []
+    private var largeBanners:String? = nil
+    
+    
     private var banners:[String] = []
-    private var outstandingTours = [Item]()
     private let homeVM = HomeViewModel()
     private var collectionView:UICollectionView?
     private var viewOnTop: ViewOnTopHomeView = {
@@ -23,7 +30,7 @@ class HomeViewController: UIViewController {
         setupUI()
         bindingData() // bind first
         homeVM.loadBanners() // then request data
-        homeVM.loadingDataTourBy(type: .outstanding)
+        homeVM.loadingDataLikeTour()
         
     }
     
@@ -74,14 +81,40 @@ class HomeViewController: UIViewController {
     }
     
     private func bindingData(){
-        homeVM.outstandingTours.bind { tours in
-            print("Outstanding tours updated: \(tours.count) tours")
+        homeVM.likeTourData.bind { tours in
             DispatchQueue.main.async{
-                self.outstandingTours = tours
+                for (_,value) in tours.enumerated(){
+                    switch value.id{
+                    case 301:
+                        self.typeOfTours = .outstanding
+                        self.outstandingTours = value.items.filter({ item in
+                            !item.titleName.hasPrefix("set-5-yellow-stars")
+                        })
+                    case 421:
+                        self.typeOfTours = .international
+                        self.internationalTours = value.items.filter({ item in
+                            !item.titleName.hasPrefix("set-5-yellow-stars")
+                        })
+                    case 423:
+                        self.typeOfTours = .domestic
+                        self.domesticTours  = value.items.filter({ item in
+                            !item.titleName.hasPrefix("set-5-yellow-stars")
+                        })
+                    case 447:
+                        self.typeOfTours = .group
+                        self.groupTours  = value.items.filter({ item in
+                            !item.titleName.hasPrefix("set-5-yellow-stars")
+                        })
+                    case 419:
+                        self.largeBanners = value.items.first?.imgLink
+                    default:
+                        break
+                    }
+                }
                 self.collectionView?.reloadData()
             }
-            
         }
+        
         homeVM.banners.bind { [weak self ] banners in
             DispatchQueue.main.async {
                 self?.banners = banners
@@ -92,11 +125,11 @@ class HomeViewController: UIViewController {
 }
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return homeVM.arrayCell.count
+        return homeVM.arrItemsCell.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cellName = homeVM.arrayCell[indexPath.item]
+        let cellName = homeVM.arrItemsCell[indexPath.item]
         
         switch cellName {
         case "BannerCollectionViewCell":
@@ -115,14 +148,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OutstandingTourCollectionViewCell", for: indexPath) as? OutstandingTourCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            cell.inject(data: self.outstandingTours, homeVM: homeVM)
+            cell.inject(data: outstandingTours, homeVM: homeVM)
             return cell
             
         case "LargeBannerCollectionViewCell":
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LargeBannerCollectionViewCell", for: indexPath) as? LargeBannerCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            cell.imageLargeBanner.load(urlString: "")
+            cell.imageLargeBanner.load(urlString: largeBanners ?? "" )
             return cell
             
         default:
@@ -134,17 +167,17 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = UIScreen.main.bounds.width
-        let cellName = homeVM.arrayCell[indexPath.item]
+        let cellName = homeVM.arrItemsCell[indexPath.item]
         
         switch cellName {
         case "BannerCollectionViewCell":
             return CGSize(width: width, height: 350)
         case "InforCollectionViewCell":
-            return CGSize(width: width, height: 200)
+            return CGSize(width: width, height: 220)
         case "OutstandingTourCollectionViewCell":
             return CGSize(width: width, height: 350)
         case "LargeBannerCollectionViewCell":
-            return CGSize(width: width, height: 500)
+            return CGSize(width: width, height: 350)
         default:
             return CGSize(width: width, height: 80)
         }

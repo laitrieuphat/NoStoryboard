@@ -16,17 +16,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="432" height="462"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UkQ-xr-EWh">
-                        <rect key="frame" x="0.0" y="59" width="432" height="369"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UkQ-xr-EWh">
+                        <rect key="frame" x="0.0" y="0.0" width="432" height="462"/>
                     </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="top" secondItem="UkQ-xr-EWh" secondAttribute="top" id="fvL-GT-lyA"/>
-                <constraint firstItem="UkQ-xr-EWh" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="g0Y-Wr-fyl"/>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="UkQ-xr-EWh" secondAttribute="trailing" id="gcj-pS-TGp"/>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="UkQ-xr-EWh" secondAttribute="bottom" id="tEb-en-JVg"/>
+                <constraint firstAttribute="trailing" secondItem="UkQ-xr-EWh" secondAttribute="trailing" id="4A3-qf-HAs"/>
+                <constraint firstItem="UkQ-xr-EWh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="AGp-dR-oRu"/>
+                <constraint firstItem="UkQ-xr-EWh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="B1e-YM-eFy"/>
+                <constraint firstAttribute="bottom" secondItem="UkQ-xr-EWh" secondAttribute="bottom" id="xGa-jF-d9j"/>
             </constraints>
             <size key="customSize" width="432" height="462"/>
             <connections>

@@ -28,7 +28,7 @@ enum TypeOfTour:Int{
 }
 protocol HomeServiceProtocol {
     func fetchBannerLinks(completion: @escaping (Result<[String], Error>) -> Void)
-    func fetchDataTour(by id:TypeOfTour ,completion: @escaping (Result<[Item], Error>) -> Void)
+    func fetchDataLikeTour(completion: @escaping (Result<[LikeTourDatum], Error>) -> Void)
     func fetchLargeBanner(by id: TypeOfTour,
                           completion: @escaping (Result<String, Error>) -> Void)
 }
@@ -38,21 +38,18 @@ final class HomeService: HomeServiceProtocol {
         
     }
     
-    func fetchDataTour(by id:TypeOfTour, completion: @escaping (Result<[Item], any Error>) -> Void){
+    func fetchDataLikeTour(completion: @escaping (Result<[LikeTourDatum], any Error>) -> Void){
         DispatchQueue.global(qos: .background).async{
             do {
-                var arrayItem:[Item] = []
-                let model: HomeModel = try LocalJSONLoader.load(HomeModel.self,
+                var likeTourData: Array<LikeTourDatum> = [LikeTourDatum]()
+                let model: HomeModel? = try LocalJSONLoader.load(HomeModel.self,
                                                                 fromResource: "allData",
                                                                 subdirectory: "LocalData")
                 // Collect all items from likeTourData
-                for (_,value) in model.likeTourData.enumerated() {
-                    let filteredItems = value.items.filter { !$0.titleName.hasPrefix("set-5-yellow-stars") }
-                    if value.id == id.rawValue && !filteredItems.isEmpty{
-                        arrayItem.append(contentsOf: filteredItems)
-                    }
-                }
-                completion(.success(arrayItem))
+                guard let arr = model?.likeTourData else { return  }
+                likeTourData.append(contentsOf: arr)
+
+                completion(.success(likeTourData))
             } catch {
                 completion(.failure(error))
             }
