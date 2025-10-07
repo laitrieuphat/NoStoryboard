@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
     
     private var banners:[String] = []
     private let homeVM = HomeViewModel()
-    private var collectionView:UICollectionView?
+    private var mainClsView:UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     private var viewOnTop: ViewOnTopHomeView = {
         var view = ViewOnTopHomeView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -36,8 +36,6 @@ class HomeViewController: UIViewController {
     
     fileprivate func setupUI() {
         self.navigationController?.navigationBar.isHidden = true
-        self.collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
-        guard let mainClsView = collectionView else { return }
         view.addSubview(mainClsView)
         view.addSubview(viewOnTop)
         
@@ -55,17 +53,6 @@ class HomeViewController: UIViewController {
         
         
         // configure collection view layout
-        mainClsView.backgroundColor = .blue
-        if let layout = mainClsView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .vertical
-            layout.minimumLineSpacing = 8
-            layout.minimumInteritemSpacing = 0
-            layout.sectionInset = .zero
-        }
-        
-        // configure collection view
-        //        mainClsView.frame = view.bounds
-        // allow autoresizing so it resizes with view and doesn't cover tab bar
         mainClsView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mainClsView.backgroundColor = .white
         mainClsView.delegate = self
@@ -73,8 +60,11 @@ class HomeViewController: UIViewController {
         mainClsView.translatesAutoresizingMaskIntoConstraints = false
         mainClsView.register(UINib(nibName: "BannerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: BannerCollectionViewCell.identifier)
         mainClsView.register(UINib(nibName: "InforCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: InforCollectionViewCell.identifier)
-        mainClsView.register(UINib(nibName: "OutstandingTourCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: OutstandingTourCollectionViewCell.indentifier)
+        mainClsView.register(UINib(nibName: "OutstandingTourCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: OutstandingTourCollectionViewCell.identifier)
         mainClsView.register(UINib(nibName: "LargeBannerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: LargeBannerCollectionViewCell.indentifier)
+        
+//        mainClsView.register(UINib(nibName: "InternationTourCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: InternationTourCollectionViewCell.indentifier)
+        mainClsView.register(InternationTourCollectionViewCell.self, forCellWithReuseIdentifier: InternationTourCollectionViewCell.indentifier)
         
         // register default cell for unexpected items
         mainClsView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -111,14 +101,14 @@ class HomeViewController: UIViewController {
                         break
                     }
                 }
-                self.collectionView?.reloadData()
+                self.mainClsView.reloadData()
             }
         }
         
         homeVM.banners.bind { [weak self ] banners in
             DispatchQueue.main.async {
                 self?.banners = banners
-                self?.collectionView?.reloadData()
+                self?.mainClsView.reloadData()
             }
         }
     }
@@ -142,7 +132,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InforCollectionViewCell", for: indexPath) as? InforCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            cell.backgroundColor = .systemGray4
             return cell
         case "OutstandingTourCollectionViewCell":
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OutstandingTourCollectionViewCell", for: indexPath) as? OutstandingTourCollectionViewCell else {
@@ -157,7 +146,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
             cell.imageLargeBanner.load(urlString: largeBanners ?? "" )
             return cell
-            
+        case "InternationTourCollectionViewCell":
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InternationTourCollectionViewCell", for: indexPath) as? InternationTourCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            cell.inject(data: internationalTours, homeVM: homeVM)
+            return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
             cell.backgroundColor = .red
@@ -175,9 +169,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case "InforCollectionViewCell":
             return CGSize(width: width, height: 220)
         case "OutstandingTourCollectionViewCell":
-            return CGSize(width: width, height: 350)
+            return CGSize(width: width, height: 380)
         case "LargeBannerCollectionViewCell":
             return CGSize(width: width, height: 350)
+        case "InternationTourCollectionViewCell":
+            return CGSize(width: width, height: 400)
         default:
             return CGSize(width: width, height: 80)
         }

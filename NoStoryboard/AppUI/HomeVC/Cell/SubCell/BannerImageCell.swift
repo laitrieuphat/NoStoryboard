@@ -34,6 +34,11 @@ final class BannerImageCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
+    override func prepareForReuse() {
+        self.imageView.image = nil
+        self.imageView.image = UIImage(systemName: "LogoLikeTour")
+    }
+    
     func configure(withImage urlString: String?) {
         if let url = urlString{
             imageView.load(urlString: url )

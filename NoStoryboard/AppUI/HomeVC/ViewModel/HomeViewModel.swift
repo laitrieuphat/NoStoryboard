@@ -20,7 +20,7 @@ final class HomeViewModel {
         "InforCollectionViewCell",
         "OutstandingTourCollectionViewCell",
         "LargeBannerCollectionViewCell",
-        "ProductCollectionViewCell",
+        "InternationTourCollectionViewCell",
         "CategoryCollectionViewCell",
         "ProductCollectionViewCell"]
     init(service: HomeServiceProtocol = HomeService()) {

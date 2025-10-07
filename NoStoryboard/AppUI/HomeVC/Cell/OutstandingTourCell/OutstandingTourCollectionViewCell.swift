@@ -8,16 +8,17 @@
 import UIKit
 
 class OutstandingTourCollectionViewCell: UICollectionViewCell {
-  
-    static let indentifier = "OutstandingTourCollectionViewCell"
+    static let identifier = "OutstandingTourCollectionViewCell"
     private var outstandingTours: [Item] = []
     @IBOutlet weak var titleNameLbl: UILabel!
     @IBOutlet weak var outstandingTourClsView: UICollectionView!
+    @IBOutlet weak var showMoreBtn: UIButton!
     var homeVM: HomeViewModel?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         setupCollectionView()
+        setupBtnShowMore()
     }
     
     func inject(data outstandingTours:[Item], homeVM: HomeViewModel){
@@ -26,13 +27,19 @@ class OutstandingTourCollectionViewCell: UICollectionViewCell {
         self.outstandingTourClsView.reloadData()
     }
     
+    private func setupBtnShowMore(){
+        self.showMoreBtn.setTitle("Xem Tất Cả", for: .normal)
+        self.showMoreBtn.setTitleColor(.white, for: .normal)
+    }
+    
     private func setupCollectionView(){
         guard let outstandingTourClsView = outstandingTourClsView else { return }
+        outstandingTourClsView.backgroundColor = .clear
         outstandingTourClsView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         outstandingTourClsView.showsHorizontalScrollIndicator = false
         outstandingTourClsView.delegate = self
         outstandingTourClsView.dataSource = self
-        outstandingTourClsView.register(UINib(nibName: "OutstandingItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: OutstandingItemCollectionViewCell.identifier)
+        outstandingTourClsView.register(UINib(nibName: "OutstandingItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ElementDetailItemTourCollectionViewCell.identifier)
         if let layout = outstandingTourClsView.collectionViewLayout as? UICollectionViewFlowLayout {
         
             layout.scrollDirection = .horizontal
@@ -49,7 +56,7 @@ extension OutstandingTourCollectionViewCell: UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OutstandingItemCollectionViewCell", for: indexPath) as? OutstandingItemCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OutstandingItemCollectionViewCell", for: indexPath) as? ElementDetailItemTourCollectionViewCell else {
             return UICollectionViewCell()
         }
         cell.titleNameItem.text = outstandingTours[indexPath.item].titleName
@@ -61,7 +68,8 @@ extension OutstandingTourCollectionViewCell: UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = UIScreen.main.bounds.width
-        return CGSize(width: width/3, height: 400)
+        let height = collectionView.bounds.height
+        return CGSize(width: width/3, height: height)
     }
     
 }

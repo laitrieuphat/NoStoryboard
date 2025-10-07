@@ -3,6 +3,22 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #2 in closure #1 in closure #1 in HomeViewController.bindingData():HomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.internationalTours ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "InternationTourCollectionViewCell.inject(data:homeVM:):InternationTourCollectionViewCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "interTours">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "OutstandingTourCollectionViewCell.collectionView(_:numberOfItemsInSection:):OutstandingTourCollectionViewCell.swift">
          <PersistentStrings>
             <PersistentString
@@ -29,6 +45,9 @@
             </PersistentString>
             <PersistentString
                value = "tours">
+            </PersistentString>
+            <PersistentString
+               value = "self.internationalTours">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

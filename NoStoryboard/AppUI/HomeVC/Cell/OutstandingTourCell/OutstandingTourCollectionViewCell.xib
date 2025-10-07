@@ -38,7 +38,7 @@
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FmX-gn-4dr">
                                 <rect key="frame" x="163.66666666666666" y="316" width="132.99999999999997" height="27"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <color key="backgroundColor" red="0.38039215686274508" green="0.70588235294117641" blue="0.27058823529411763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="133" id="GaK-p2-HkU"/>
                                     <constraint firstAttribute="height" constant="27" id="im7-nh-mym"/>
@@ -73,6 +73,7 @@
             <size key="customSize" width="460" height="343"/>
             <connections>
                 <outlet property="outstandingTourClsView" destination="ZLR-1b-OsW" id="jTi-l0-S3x"/>
+                <outlet property="showMoreBtn" destination="FmX-gn-4dr" id="EZC-7o-5Kw"/>
                 <outlet property="titleNameLbl" destination="9Fw-4M-tJq" id="1eu-vA-23C"/>
             </connections>
             <point key="canvasLocation" x="401.52671755725191" y="69.366197183098592"/>
@@ -81,9 +82,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

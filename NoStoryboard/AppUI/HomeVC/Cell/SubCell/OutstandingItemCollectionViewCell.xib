@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="OutstandingItemCollectionViewCell" customModule="NoStoryboard" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ElementDetailItemTourCollectionViewCell" customModule="NoStoryboard" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="252" height="381"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -21,36 +21,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="252" height="381"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoLikeTour" translatesAutoresizingMaskIntoConstraints="NO" id="MRA-Qg-0jN">
-                                <rect key="frame" x="0.0" y="60" width="252" height="140"/>
+                                <rect key="frame" x="1" y="10" width="250" height="140"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="140" id="xlI-JB-L4N"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Hải Hoả - Hải Nam - Trung Quốc 4N4D" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ts0-aw-vbx">
-                                <rect key="frame" x="0.0" y="200" width="252" height="33.666666666666657"/>
+                                <rect key="frame" x="1" y="160" width="250" height="33.666666666666657"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <color key="textColor" systemColor="systemGreenColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mkb-lh-MEA">
-                                <rect key="frame" x="0.0" y="233.66666666666666" width="242" height="29.999999999999972"/>
+                                <rect key="frame" x="1" y="203.66666666666666" width="240" height="30"/>
                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Mru-Lt-5I6"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabelLabelLabelLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xLp-Cz-DvJ">
-                                <rect key="frame" x="0.0" y="264.66666666666669" width="252" height="14.333333333333314"/>
+                                <rect key="frame" x="1" y="238.66666666666666" width="250" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="250" constant="21" id="VVK-QS-JSD"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liên hệ ngay" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VTx-Eo-5Ni">
-                                <rect key="frame" x="0.0" y="299" width="89" height="17"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
+                                <rect key="frame" x="1" y="275.66666666666669" width="100.33333333333333" height="19.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="16"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -60,16 +60,16 @@
                             <constraint firstItem="xLp-Cz-DvJ" firstAttribute="leading" secondItem="ts0-aw-vbx" secondAttribute="leading" id="3CY-k5-uMh"/>
                             <constraint firstItem="VTx-Eo-5Ni" firstAttribute="top" secondItem="xLp-Cz-DvJ" secondAttribute="bottom" constant="20" id="86L-u2-r6w"/>
                             <constraint firstItem="xLp-Cz-DvJ" firstAttribute="trailing" secondItem="ts0-aw-vbx" secondAttribute="trailing" id="86l-WE-mU4"/>
-                            <constraint firstItem="MRA-Qg-0jN" firstAttribute="leading" secondItem="lRQ-SF-vAc" secondAttribute="leading" id="8jR-52-04U"/>
-                            <constraint firstAttribute="trailing" secondItem="MRA-Qg-0jN" secondAttribute="trailing" id="A8g-pM-Fn1"/>
+                            <constraint firstItem="MRA-Qg-0jN" firstAttribute="leading" secondItem="lRQ-SF-vAc" secondAttribute="leading" constant="1" id="8jR-52-04U"/>
+                            <constraint firstAttribute="trailing" secondItem="MRA-Qg-0jN" secondAttribute="trailing" constant="1" id="A8g-pM-Fn1"/>
                             <constraint firstItem="ts0-aw-vbx" firstAttribute="leading" secondItem="MRA-Qg-0jN" secondAttribute="leading" id="BKl-Yc-eoH"/>
                             <constraint firstItem="VTx-Eo-5Ni" firstAttribute="leading" secondItem="xLp-Cz-DvJ" secondAttribute="leading" id="Cjv-MC-q0n"/>
-                            <constraint firstItem="Mkb-lh-MEA" firstAttribute="top" secondItem="ts0-aw-vbx" secondAttribute="bottom" id="Luv-Uk-Kyd"/>
+                            <constraint firstItem="Mkb-lh-MEA" firstAttribute="top" secondItem="ts0-aw-vbx" secondAttribute="bottom" constant="10" id="Luv-Uk-Kyd"/>
                             <constraint firstItem="Mkb-lh-MEA" firstAttribute="leading" secondItem="ts0-aw-vbx" secondAttribute="leading" id="P9g-dZ-xce"/>
                             <constraint firstItem="ts0-aw-vbx" firstAttribute="trailing" secondItem="MRA-Qg-0jN" secondAttribute="trailing" id="Pc6-rE-Nbw"/>
-                            <constraint firstItem="xLp-Cz-DvJ" firstAttribute="top" secondItem="Mkb-lh-MEA" secondAttribute="bottom" constant="1" id="QuM-fn-1il"/>
-                            <constraint firstItem="ts0-aw-vbx" firstAttribute="top" secondItem="MRA-Qg-0jN" secondAttribute="bottom" id="nxf-Cf-Kuw"/>
-                            <constraint firstItem="MRA-Qg-0jN" firstAttribute="top" secondItem="lRQ-SF-vAc" secondAttribute="top" constant="60" id="pvU-Lo-lXb"/>
+                            <constraint firstItem="xLp-Cz-DvJ" firstAttribute="top" secondItem="Mkb-lh-MEA" secondAttribute="bottom" constant="5" id="QuM-fn-1il"/>
+                            <constraint firstItem="ts0-aw-vbx" firstAttribute="top" secondItem="MRA-Qg-0jN" secondAttribute="bottom" constant="10" id="nxf-Cf-Kuw"/>
+                            <constraint firstItem="MRA-Qg-0jN" firstAttribute="top" secondItem="lRQ-SF-vAc" secondAttribute="top" constant="10" id="pvU-Lo-lXb"/>
                             <constraint firstItem="Mkb-lh-MEA" firstAttribute="trailing" secondItem="ts0-aw-vbx" secondAttribute="trailing" constant="-10" id="zw7-pq-3pk"/>
                         </constraints>
                     </view>

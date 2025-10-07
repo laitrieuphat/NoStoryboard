@@ -18,7 +18,6 @@ class BannerCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
         // configure collection view layout for horizontal scrolling
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
