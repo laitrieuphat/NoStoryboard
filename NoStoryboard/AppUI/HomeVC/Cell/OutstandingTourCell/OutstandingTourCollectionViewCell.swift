@@ -28,8 +28,12 @@ class OutstandingTourCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupBtnShowMore(){
-        self.showMoreBtn.setTitle("Xem Tất Cả", for: .normal)
+        self.showMoreBtn.translatesAutoresizingMaskIntoConstraints = false
+        self.showMoreBtn.setTitle("Show More", for: .normal)
         self.showMoreBtn.setTitleColor(.white, for: .normal)
+        self.showMoreBtn.backgroundColor = .systemGreen
+        self.showMoreBtn.layer.cornerRadius = 2
+        self.showMoreBtn.clipsToBounds = true
     }
     
     private func setupCollectionView(){
@@ -39,7 +43,7 @@ class OutstandingTourCollectionViewCell: UICollectionViewCell {
         outstandingTourClsView.showsHorizontalScrollIndicator = false
         outstandingTourClsView.delegate = self
         outstandingTourClsView.dataSource = self
-        outstandingTourClsView.register(UINib(nibName: "OutstandingItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ElementDetailItemTourCollectionViewCell.identifier)
+        outstandingTourClsView.register(UINib(nibName: "ElementDetailItemTourCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ElementDetailItemTourCollectionViewCell.identifier)
         if let layout = outstandingTourClsView.collectionViewLayout as? UICollectionViewFlowLayout {
         
             layout.scrollDirection = .horizontal
@@ -56,7 +60,7 @@ extension OutstandingTourCollectionViewCell: UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OutstandingItemCollectionViewCell", for: indexPath) as? ElementDetailItemTourCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ElementDetailItemTourCollectionViewCell", for: indexPath) as? ElementDetailItemTourCollectionViewCell else {
             return UICollectionViewCell()
         }
         cell.titleNameItem.text = outstandingTours[indexPath.item].titleName

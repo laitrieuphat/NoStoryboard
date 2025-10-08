@@ -11,7 +11,7 @@ protocol OutstandingItemCollectionViewCellDelegate {
 }
 
 class ElementDetailItemTourCollectionViewCell: UICollectionViewCell {
-    static let identifier = "OutstandingItemCollectionViewCell"
+    static let identifier = "ElementDetailItemTourCollectionViewCell"
     var delegate: OutstandingItemCollectionViewCellDelegate?
     @IBOutlet weak var imgViewItem: UIImageView!
     

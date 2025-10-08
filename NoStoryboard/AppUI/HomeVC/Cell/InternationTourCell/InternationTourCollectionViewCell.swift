@@ -17,7 +17,7 @@ class InternationTourCollectionViewCell: UICollectionViewCell {
         lbl.font = UIFont.boldSystemFont(ofSize: 25)
         lbl.textColor = .systemRed
         lbl.textAlignment = .center
-        lbl.text = "Tour Quốc Tế"
+        lbl.text = "TOUR QUỐC Tế"
         return lbl
     }()
     
@@ -29,17 +29,21 @@ class InternationTourCollectionViewCell: UICollectionViewCell {
         return cls
     }()
     
-//
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        // Initialization code
-//        setupCollectionView()
-//    }
-    
+    private lazy var showMoreBtn: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("Show More", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.backgroundColor = .systemGreen
+        btn.layer.cornerRadius = 2
+        btn.clipsToBounds = true
+        // Optional: add target action later from the view controller via injection
+        return btn
+    }()
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupCollectionView()
-//        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -54,36 +58,48 @@ class InternationTourCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupConstraints(){
+        // avoid adding constraints multiple times
+        guard titleLblInterTour.superview == nil else { return }
+
+        // add title, collection view, and the show more button
         contentView.addSubview(titleLblInterTour)
-        NSLayoutConstraint.activate([
-            titleLblInterTour.widthAnchor.constraint(equalToConstant: 100),
-            titleLblInterTour.heightAnchor.constraint(equalToConstant: 30),
-            titleLblInterTour.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-           
-            titleLblInterTour.bottomAnchor.constraint(equalTo: interTourClsView.topAnchor, constant: 0)
-            ])
-    }
-        
-    
-    private func setupCollectionView(){
         contentView.addSubview(interTourClsView)
-        interTourClsView.frame = contentView.bounds
-        interTourClsView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-        
-        
-        // Use Auto Layout constraints instead of setting frame/autoresizing
-        
+        contentView.addSubview(showMoreBtn)
+
+        NSLayoutConstraint.activate([
+            // Title label on top
+            titleLblInterTour.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            titleLblInterTour.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            titleLblInterTour.heightAnchor.constraint(equalToConstant: 30),
+
+            // Collection view below title
+            interTourClsView.topAnchor.constraint(equalTo: titleLblInterTour.bottomAnchor, constant: 8),
+            interTourClsView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            interTourClsView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            // showMoreBtn will be below the collection view
+            interTourClsView.bottomAnchor.constraint(equalTo: showMoreBtn.topAnchor, constant: -8),
+
+            showMoreBtn.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            showMoreBtn.widthAnchor.constraint(equalToConstant: 133),
+            showMoreBtn.heightAnchor.constraint(equalToConstant: 27),
+            showMoreBtn.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
+        ])
+     }
+         
+     private func setupCollectionView(){
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 0
         interTourClsView.collectionViewLayout = layout
         interTourClsView.delegate = self
         interTourClsView.dataSource = self
-        interTourClsView.register(UINib(nibName: "OutstandingItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ElementDetailItemTourCollectionViewCell.identifier)
-
-    }
-}
-
-extension InternationTourCollectionViewCell:UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+        interTourClsView.register(UINib(nibName: "ElementDetailItemTourCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ElementDetailItemTourCollectionViewCell.identifier)
+         setupConstraints()
+     }
+ }
+ 
+ extension InternationTourCollectionViewCell:UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -100,14 +116,14 @@ extension InternationTourCollectionViewCell:UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OutstandingItemCollectionViewCell", for: indexPath) as? ElementDetailItemTourCollectionViewCell else { return UICollectionViewCell()}
-        
-        cell.titleNameItem.text = interTours[indexPath.item].titleName
-        cell.imgViewItem.load(urlString: interTours[indexPath.item].imgLink)
-        cell.Subtile.text =  "Lịch khởi hành:\(interTours[indexPath.item].time.rawValue)"
-        //        cell.delegate = self
-        return cell
-    }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ElementDetailItemTourCollectionViewCell.identifier, for: indexPath) as? ElementDetailItemTourCollectionViewCell else { return UICollectionViewCell()}
+         
+         cell.titleNameItem.text = interTours[indexPath.item].titleName
+         cell.imgViewItem.load(urlString: interTours[indexPath.item].imgLink)
+         cell.Subtile.text =  "Lịch khởi hành:\(interTours[indexPath.item].time.rawValue)"
+         //        cell.delegate = self
+         return cell
+     }
     
 
     
