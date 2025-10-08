@@ -14,5 +14,10 @@ class LargeBannerCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    override func prepareForReuse() {
+        imageLargeBanner.image = nil
+        
+    }
 
 }

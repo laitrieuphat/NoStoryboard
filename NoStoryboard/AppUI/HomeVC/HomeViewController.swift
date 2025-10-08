@@ -13,8 +13,8 @@ class HomeViewController: UIViewController {
     private var internationalTours:[Item] = []
     private var domesticTours:[Item] = []
     private var groupTours:[Item] = []
-    private var largeBanners:String? = nil
-    
+    private var largeBanners:[String] = []
+
     
     private var banners:[String] = []
     private let homeVM = HomeViewModel()
@@ -73,6 +73,8 @@ class HomeViewController: UIViewController {
     private func bindingData(){
         homeVM.likeTourData.bind { tours in
             DispatchQueue.main.async{
+                // reset collected large banners before processing
+                self.largeBanners.removeAll()
                 for (_,value) in tours.enumerated(){
                     switch value.id{
                     case 301:
@@ -95,8 +97,11 @@ class HomeViewController: UIViewController {
                         self.groupTours  = value.items.filter({ item in
                             !item.titleName.hasPrefix("set-5-yellow-stars")
                         })
-                    case 419:
-                        self.largeBanners = value.items.first?.imgLink
+                    case 419, 420, 422:
+                        // collect large banner links for ids 419, 420, 422
+                        if let link = value.items.first?.imgLink {
+                            self.largeBanners.append(link)
+                        }
                     default:
                         break
                     }
@@ -144,7 +149,21 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LargeBannerCollectionViewCell", for: indexPath) as? LargeBannerCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            cell.imageLargeBanner.load(urlString: largeBanners ?? "" )
+
+            let idString = "LargeBannerCollectionViewCell"
+
+            let index = homeVM.arrItemsCell.prefix(indexPath.item + 1).filter { string in
+                string == idString
+            }.count - 1
+
+            // pick the corresponding banner link by the occurrence index
+            let bannerURL: String
+            if index >= 0 && index < self.largeBanners.count {
+                bannerURL = self.largeBanners[index]
+            } else {
+                bannerURL = ""
+            }
+            cell.imageLargeBanner.load(urlString: bannerURL)
             return cell
         case "InternationTourCollectionViewCell":
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InternationTourCollectionViewCell", for: indexPath) as? InternationTourCollectionViewCell else {
