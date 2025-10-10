@@ -30,10 +30,28 @@
          contextName = "HomeViewController.collectionView(_:cellForItemAt:):HomeViewController.swift">
          <PersistentStrings>
             <PersistentString
+               value = "largeBanners">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.item">
+            </PersistentString>
+            <PersistentString
                value = "self.outstandingTours">
             </PersistentString>
             <PersistentString
-               value = "largeBanners">
+               value = "indexPath">
+            </PersistentString>
+            <PersistentString
+               value = "homeVM.arrItemsCell.prefix(indexPath.item)">
+            </PersistentString>
+            <PersistentString
+               value = "homeVM.arrItemsCell.prefix(indexPath.item + 1)">
+            </PersistentString>
+            <PersistentString
+               value = "homeVM.arrItemsCell">
+            </PersistentString>
+            <PersistentString
+               value = "largeBannerArrays.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

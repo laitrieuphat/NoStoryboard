@@ -17,7 +17,7 @@ class InternationTourCollectionViewCell: UICollectionViewCell {
         lbl.font = UIFont.boldSystemFont(ofSize: 25)
         lbl.textColor = .systemRed
         lbl.textAlignment = .center
-        lbl.text = "TOUR QUỐC Tế"
+        lbl.text = "TOUR QUỐC TẾ"
         return lbl
     }()
     

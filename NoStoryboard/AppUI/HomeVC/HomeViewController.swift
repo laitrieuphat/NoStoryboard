@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     private var groupTours:[Item] = []
     private var largeBanners:[String] = []
 
+
     
     private var banners:[String] = []
     private let homeVM = HomeViewModel()
@@ -98,9 +99,9 @@ class HomeViewController: UIViewController {
                             !item.titleName.hasPrefix("set-5-yellow-stars")
                         })
                     case 419, 420, 422:
-                        // collect large banner links for ids 419, 420, 422
                         if let link = value.items.first?.imgLink {
                             self.largeBanners.append(link)
+
                         }
                     default:
                         break
@@ -150,20 +151,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 return UICollectionViewCell()
             }
 
-            let idString = "LargeBannerCollectionViewCell"
+            let indexOcurence = homeVM.arrItemsCell.prefix(indexPath.item + 1).filter { $0 == "LargeBannerCollectionViewCell"}.count - 1
 
-            let index = homeVM.arrItemsCell.prefix(indexPath.item + 1).filter { string in
-                string == idString
-            }.count - 1
-
-            // pick the corresponding banner link by the occurrence index
-            let bannerURL: String
-            if index >= 0 && index < self.largeBanners.count {
-                bannerURL = self.largeBanners[index]
-            } else {
-                bannerURL = ""
-            }
+        
+            let bannerURL:String = indexOcurence >= 0 && indexOcurence < self.largeBanners.count ? self.largeBanners[indexOcurence] : ""
+            
             cell.imageLargeBanner.load(urlString: bannerURL)
+
             return cell
         case "InternationTourCollectionViewCell":
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InternationTourCollectionViewCell", for: indexPath) as? InternationTourCollectionViewCell else {
@@ -192,7 +186,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case "LargeBannerCollectionViewCell":
             return CGSize(width: width, height: 350)
         case "InternationTourCollectionViewCell":
-            return CGSize(width: width, height: 400)
+            return CGSize(width: width, height: 410)
         default:
             return CGSize(width: width, height: 80)
         }

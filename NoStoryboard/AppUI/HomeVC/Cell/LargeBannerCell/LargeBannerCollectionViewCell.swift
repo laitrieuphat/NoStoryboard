@@ -9,6 +9,7 @@ import UIKit
 
 class LargeBannerCollectionViewCell: UICollectionViewCell {
     static let indentifier = "LargeBannerCollectionViewCell"
+    
     @IBOutlet weak var imageLargeBanner: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -17,7 +18,5 @@ class LargeBannerCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         imageLargeBanner.image = nil
-        
     }
-
 }
