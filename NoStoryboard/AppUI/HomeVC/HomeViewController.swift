@@ -67,6 +67,7 @@ class HomeViewController: UIViewController {
 //        mainClsView.register(UINib(nibName: "InternationTourCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: InternationTourCollectionViewCell.indentifier)
         mainClsView.register(InternationTourCollectionViewCell.self, forCellWithReuseIdentifier: InternationTourCollectionViewCell.indentifier)
         mainClsView.register(DomesticTourCollectionViewCell.self, forCellWithReuseIdentifier: DomesticTourCollectionViewCell.indentifier)
+        mainClsView.register(GroupTourCollectionViewCell.self, forCellWithReuseIdentifier: GroupTourCollectionViewCell.indentifier)
         // register default cell for unexpected items
         mainClsView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
@@ -182,6 +183,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
             cell.inject(data: domesticTours, homeVM: homeVM)
             return cell
+        case "GroupTourCollectionViewCell":
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GroupTourCollectionViewCell", for: indexPath) as? GroupTourCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            cell.inject(data: groupTours, homeVM: homeVM)
+            return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
             cell.backgroundColor = .red
@@ -205,6 +212,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case "InternationTourCollectionViewCell":
             return CGSize(width: width, height: 410)
         case "DomesticTourCollectionViewCell":
+            return CGSize(width: width, height: 410)
+        case "GroupTourCollectionViewCell":
             return CGSize(width: width, height: 410)
         default:
             return CGSize(width: width, height: 80)
