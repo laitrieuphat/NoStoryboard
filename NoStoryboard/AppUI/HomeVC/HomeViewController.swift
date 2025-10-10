@@ -66,7 +66,7 @@ class HomeViewController: UIViewController {
         
 //        mainClsView.register(UINib(nibName: "InternationTourCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: InternationTourCollectionViewCell.indentifier)
         mainClsView.register(InternationTourCollectionViewCell.self, forCellWithReuseIdentifier: InternationTourCollectionViewCell.indentifier)
-        
+        mainClsView.register(DomesticTourCollectionViewCell.self, forCellWithReuseIdentifier: DomesticTourCollectionViewCell.indentifier)
         // register default cell for unexpected items
         mainClsView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
@@ -151,12 +151,22 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 return UICollectionViewCell()
             }
 
-            let indexOcurence = homeVM.arrItemsCell.prefix(indexPath.item + 1).filter { $0 == "LargeBannerCollectionViewCell"}.count - 1
-
-        
-            let bannerURL:String = indexOcurence >= 0 && indexOcurence < self.largeBanners.count ? self.largeBanners[indexOcurence] : ""
             
-            cell.imageLargeBanner.load(urlString: bannerURL)
+            // count occurrences up to and including current index
+            var occurrenceIndex = -1
+            for i in 0...indexPath.item {
+                if homeVM.arrItemsCell[i] == "LargeBannerCollectionViewCell" {
+                    occurrenceIndex += 1
+                }
+            }
+            if occurrenceIndex < 0 { occurrenceIndex = 0 } // safety
+            
+//            let indexOcurence = homeVM.arrItemsCell.prefix(indexPath.item + 1).filter { $0 == "LargeBannerCollectionViewCell"}.count - 1
+//
+//        
+//            let bannerURL:String = indexOcurence >= 0 && indexOcurence < self.largeBanners.count ? self.largeBanners[indexOcurence] : ""
+            
+            cell.imageLargeBanner.load(urlString: self.largeBanners[occurrenceIndex])
 
             return cell
         case "InternationTourCollectionViewCell":
@@ -164,6 +174,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 return UICollectionViewCell()
             }
             cell.inject(data: internationalTours, homeVM: homeVM)
+            return cell
+            
+        case "DomesticTourCollectionViewCell":
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DomesticTourCollectionViewCell", for: indexPath) as? DomesticTourCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            cell.inject(data: domesticTours, homeVM: homeVM)
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
@@ -186,6 +203,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case "LargeBannerCollectionViewCell":
             return CGSize(width: width, height: 350)
         case "InternationTourCollectionViewCell":
+            return CGSize(width: width, height: 410)
+        case "DomesticTourCollectionViewCell":
             return CGSize(width: width, height: 410)
         default:
             return CGSize(width: width, height: 80)
