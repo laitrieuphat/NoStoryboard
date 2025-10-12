@@ -155,19 +155,19 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             // count occurrences up to and including current index
             var occurrenceIndex = -1
+            var bannerLargeString: String
             for i in 0...indexPath.item {
                 if homeVM.arrItemsCell[i] == "LargeBannerCollectionViewCell" {
-                    occurrenceIndex += 1
+                    occurrenceIndex = occurrenceIndex + 1
                 }
             }
-            if occurrenceIndex < 0 { occurrenceIndex = 0 } // safety
+            if occurrenceIndex >= 0 && occurrenceIndex < self.largeBanners.count {
+                bannerLargeString = self.largeBanners[occurrenceIndex]
+            }else{
+                bannerLargeString = ""
+            }
             
-//            let indexOcurence = homeVM.arrItemsCell.prefix(indexPath.item + 1).filter { $0 == "LargeBannerCollectionViewCell"}.count - 1
-//
-//        
-//            let bannerURL:String = indexOcurence >= 0 && indexOcurence < self.largeBanners.count ? self.largeBanners[indexOcurence] : ""
-            
-            cell.imageLargeBanner.load(urlString: self.largeBanners[occurrenceIndex])
+            cell.imageLargeBanner.load(urlString: bannerLargeString)
 
             return cell
         case "InternationTourCollectionViewCell":
