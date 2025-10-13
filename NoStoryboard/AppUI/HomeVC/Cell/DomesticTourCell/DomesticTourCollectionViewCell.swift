@@ -119,10 +119,9 @@ class DomesticTourCollectionViewCell: UICollectionViewCell {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ElementDetailItemTourCollectionViewCell.identifier, for: indexPath) as? ElementDetailItemTourCollectionViewCell else { return UICollectionViewCell()}
-         
-         cell.titleNameItem.text = domesTours[indexPath.item].titleName
-         cell.imgViewItem.load(urlString: domesTours[indexPath.item].imgLink)
-         cell.Subtile.text =  "Lịch khởi hành:\(domesTours[indexPath.item].time.rawValue)"
+
+        let dataOfItem:Item = domesTours[indexPath.item]
+        cell.configure(with: dataOfItem)
          //        cell.delegate = self
          return cell
      }

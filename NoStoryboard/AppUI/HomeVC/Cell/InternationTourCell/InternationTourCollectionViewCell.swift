@@ -118,10 +118,10 @@ extension InternationTourCollectionViewCell:UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ElementDetailItemTourCollectionViewCell.identifier, for: indexPath) as? ElementDetailItemTourCollectionViewCell else { return UICollectionViewCell()}
         
-        cell.titleNameItem.text = interTours[indexPath.item].titleName
-        cell.imgViewItem.load(urlString: interTours[indexPath.item].imgLink)
-        cell.Subtile.text =  "Lịch khởi hành:\(interTours[indexPath.item].time.rawValue)"
-        //        cell.delegate = self
+
+        let dataOfItem:Item = interTours[indexPath.item]
+        cell.configure(with: dataOfItem)
+//        cell.delegate = self
         return cell
     }
 }

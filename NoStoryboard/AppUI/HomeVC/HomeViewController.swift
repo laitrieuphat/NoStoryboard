@@ -168,7 +168,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 bannerLargeString = ""
             }
             
-            cell.imageLargeBanner.load(urlString: bannerLargeString)
+            cell.configure(withImage: URL(string: bannerLargeString))
 
             return cell
         case "InternationTourCollectionViewCell":

@@ -19,4 +19,17 @@ class LargeBannerCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         imageLargeBanner.image = nil
     }
+    
+    func configure(withImage url:URL?) {
+        if let url = url {
+            self.imageLargeBanner.kf.setImage(with: url, options: nil) { result in
+                switch result {
+                case .success(let imageResult):
+                    print("Image banner loaded from cache: \(imageResult.cacheType)")
+                case .failure(let error):
+                    print("Error: \(error)")
+                }
+            }
+        }
+    }
 }

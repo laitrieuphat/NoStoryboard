@@ -63,9 +63,8 @@ extension OutstandingTourCollectionViewCell: UICollectionViewDelegate, UICollect
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ElementDetailItemTourCollectionViewCell", for: indexPath) as? ElementDetailItemTourCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.titleNameItem.text = outstandingTours[indexPath.item].titleName
-        cell.imgViewItem.load(urlString: outstandingTours[indexPath.item].imgLink)
-        cell.Subtile.text =  "Lịch khởi hành:\(outstandingTours[indexPath.item].time.rawValue)"
+        let dataOfItem:Item = outstandingTours[indexPath.item]
+        cell.configure(with: dataOfItem)
         cell.delegate = self
         return cell
     }

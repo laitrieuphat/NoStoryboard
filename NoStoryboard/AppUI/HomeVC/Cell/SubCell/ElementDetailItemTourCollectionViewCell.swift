@@ -7,6 +7,7 @@
 
 import UIKit
 import Cosmos
+import Kingfisher
 
 protocol OutstandingItemCollectionViewCellDelegate {
     func didSelectItem(at indexPath: IndexPath)
@@ -42,11 +43,14 @@ class ElementDetailItemTourCollectionViewCell: UICollectionViewCell {
         imgViewItem.image = nil
         titleNameItem.text = nil
         Subtile.text = nil
-        
     }
     
-    public func configure(with item: Item) {
-        
+    public func configure(with item: Item?) {
+        if let item = item{
+            self.titleNameItem.text = item.titleName
+            self.imgViewItem.kf.setImage(with: URL(string:item.imgLink))
+            self.Subtile.text = "Lịch khởi hành:\(item.time.rawValue)"
+        }
     }
     
     private func setupCosmosView(){
