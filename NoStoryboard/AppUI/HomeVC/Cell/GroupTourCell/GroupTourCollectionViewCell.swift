@@ -19,7 +19,7 @@ class GroupTourCollectionViewCell: UICollectionViewCell {
         lbl.font = UIFont.boldSystemFont(ofSize: 25)
         lbl.textColor = .systemRed
         lbl.textAlignment = .center
-        lbl.text = "TOUR Group"
+        lbl.text = "TOUR KHÁCH ĐOÀN"
         return lbl
     }()
     

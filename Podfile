@@ -6,7 +6,7 @@ target 'NoStoryboard' do
   use_frameworks!
 
   # Pods for NoStoryboard
-	
+    pod 'Cosmos'
 
   target 'NoStoryboardTests' do
     inherit! :search_paths
