@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class BannerCollectionViewCell: UICollectionViewCell {
     static let identifier = "BannerCollectionViewCell"
@@ -87,8 +88,8 @@ extension BannerCollectionViewCell: UICollectionViewDelegate, UICollectionViewDa
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerImageCell.identifier, for: indexPath) as? BannerImageCell else {
             return UICollectionViewCell()
         }
-        let url = imgArr[indexPath.item]
-        cell.imageView.load(urlString: url)
+        
+        cell.configure(withImage: URL(string: imgArr[indexPath.item]))
         return cell
     }
     

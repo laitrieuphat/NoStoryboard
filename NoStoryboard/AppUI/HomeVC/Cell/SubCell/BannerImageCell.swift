@@ -39,9 +39,16 @@ final class BannerImageCell: UICollectionViewCell {
         self.imageView.image = UIImage(systemName: "LogoLikeTour")
     }
     
-    func configure(withImage urlString: String?) {
-        if let url = urlString{
-            imageView.load(urlString: url )
+    func configure(withImage url:URL?) {
+        if let url = url {
+            self.imageView.kf.setImage(with: url, options: nil) { result in
+                switch result {
+                case .success(let imageResult):
+                    print("Image banner loaded from cache: \(imageResult.cacheType)")
+                case .failure(let error):
+                    print("Error: \(error)")
+                }
+            }
         }
     }
 }

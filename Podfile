@@ -7,6 +7,8 @@ target 'NoStoryboard' do
 
   # Pods for NoStoryboard
     pod 'Cosmos'
+    pod 'Kingfisher'
+    
 
   target 'NoStoryboardTests' do
     inherit! :search_paths
