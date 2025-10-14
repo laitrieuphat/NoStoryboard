@@ -22,7 +22,7 @@ class BannerCollectionViewCell: UICollectionViewCell {
         // configure collection view layout for horizontal scrolling
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 1
+        layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         BannerCollectionView.collectionViewLayout = layout
         BannerCollectionView.showsHorizontalScrollIndicator = false
@@ -51,29 +51,26 @@ class BannerCollectionViewCell: UICollectionViewCell {
     
     func startAutoScroll(){
         DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
+            self.timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.changeImageBanner), userInfo: nil, repeats: true)
         }
     }
     
-    @objc func changeImage() {
+    @objc func changeImageBanner() {
         // Use contentOffset to move by one page width each tick. Wrap to start when reaching end.
-        
         guard imgArr.count > 0 else { return }
         DispatchQueue.main.async {
-            let width = self.BannerCollectionView.bounds.width
-            guard width > 0 else { return }
-            
+            let pageWidth = self.BannerCollectionView.bounds.width
+            let currentOffset = self.BannerCollectionView.contentOffset.x
             let maxOffsetX = max(self.BannerCollectionView.contentSize.width - self.BannerCollectionView.bounds.width, 0)
-            var nextX = self.BannerCollectionView.contentOffset.x + width + 1
-            var animated = true
+            
+            var nextX = currentOffset + pageWidth
             
             if nextX > maxOffsetX {
                 // reached (or passed) end — wrap to beginning
                 nextX = 0
-                animated = false
             }
             
-            self.BannerCollectionView.setContentOffset(CGPoint(x: nextX , y: 0), animated: animated)
+            self.BannerCollectionView.setContentOffset(CGPoint(x: nextX , y: 0), animated: true)
         }
     }
 }
@@ -101,7 +98,7 @@ extension BannerCollectionViewCell: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-      
+        
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
